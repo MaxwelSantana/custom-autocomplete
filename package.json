@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codemirror/lang-javascript": "^0.19.3",
+    "@codemirror/state": "^0.19.6",
+    "@codemirror/view": "^0.19.26",
+    "@lezer/generator": "^0.15.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@uiw/react-codemirror": "^4.2.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -15,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lezer-generator": "lezer-generator ./src/lib/lang-example/lang.grammar -o ./src/lib/lang-example/lang.js"
   },
   "eslintConfig": {
     "extends": [

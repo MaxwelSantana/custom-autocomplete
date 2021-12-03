@@ -1,11 +1,11 @@
 import './App.css';
-import { TextAreaAutocomplete } from './components/TextAreaAutocomplete';
+import { Editor } from './components/Editor';
 
 function App() {
   return (
     <div className="App-container">
       <h1>Hello</h1>
-      <TextAreaAutocomplete />
+      <Editor />
     </div>
   );
 }
