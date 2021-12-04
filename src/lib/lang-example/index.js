@@ -4,6 +4,7 @@ import { styleTags, tags as t } from '@codemirror/highlight';
 import { LRLanguage } from '@codemirror/language';
 import { completeFromList } from '@codemirror/autocomplete';
 import { LanguageSupport } from '@codemirror/language';
+import { readTrainingFileToArray, suggestWord } from './autocomplete/index.js';
 
 let parserWithMetadata = parser.configure({
   props: [
@@ -31,15 +32,28 @@ export const exampleLanguage = LRLanguage.define({
   },
 });
 
+function myCompletions(context) {
+  let word = context.matchBefore(/\w*/);
+  if (word.from === word.to && !context.explicit) return null;
+  console.log({ word });
+  const suggestedWord = suggestWord(word.text);
+  const options = [{ label: suggestedWord, type: 'keyword' }];
+  return {
+    from: word.from,
+    options,
+  };
+}
+
 export const exampleCompletion = exampleLanguage.data.of({
-  autocomplete: completeFromList([
-    { label: 'defun', type: 'keyword' },
-    { label: 'defvar', type: 'keyword' },
-    { label: 'let', type: 'keyword' },
-    { label: 'cons', type: 'function' },
-    { label: 'car', type: 'function' },
-    { label: 'cdr', type: 'function' },
-  ]),
+  // autocomplete: completeFromList([
+  //   { label: 'defun', type: 'keyword' },
+  //   { label: 'defvar', type: 'keyword' },
+  //   { label: 'let', type: 'keyword' },
+  //   { label: 'cons', type: 'function' },
+  //   { label: 'car', type: 'function' },
+  //   { label: 'cdr', type: 'function' },
+  // ]),
+  autocomplete: myCompletions,
 });
 
 export function example() {

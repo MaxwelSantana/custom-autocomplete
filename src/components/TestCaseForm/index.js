@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Editor } from '../Editor';
+
 import './index.css';
 
 function TestCaseForm() {
@@ -55,6 +57,8 @@ press "Sign in with Apple"`,
                 onChange={handleChange}
               />
             </Form.Group>
+            <Editor />
+            {/**
             <Form.Group className="mb-3" controlId="testCaseForm.customSteps">
               <Form.Label>Custom steps new line separated:</Form.Label>
               <Form.Control
@@ -65,6 +69,7 @@ press "Sign in with Apple"`,
                 onChange={handleChange}
               />
             </Form.Group>
+             */}
           </Form>
         </Modal.Body>
         <Modal.Footer>
