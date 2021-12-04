@@ -1,11 +1,10 @@
 import './App.css';
-import { Editor } from './components/Editor';
+import TestCaseForm from './components/TestCaseForm';
 
 function App() {
   return (
     <div className="App-container">
-      <h1>Hello</h1>
-      <Editor />
+      <TestCaseForm />
     </div>
   );
 }
