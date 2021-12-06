@@ -1,15 +1,21 @@
-import { parser } from './lang.js';
-import { foldNodeProp, foldInside, indentNodeProp } from '@codemirror/language';
+import { completeFromList, ifNotIn } from '@codemirror/autocomplete';
 import { styleTags, tags as t } from '@codemirror/highlight';
-import { LRLanguage } from '@codemirror/language';
-import { completeFromList } from '@codemirror/autocomplete';
-import { LanguageSupport } from '@codemirror/language';
-import { readTrainingFileToArray, suggestWord } from './autocomplete/index.js';
+import {
+  foldInside,
+  foldNodeProp,
+  indentNodeProp,
+  LanguageSupport,
+  LRLanguage,
+} from '@codemirror/language';
+import { suggestWord } from './autocomplete/index.js';
+import { parser } from './lang.js';
+import { snippets } from './snippets';
 
 let parserWithMetadata = parser.configure({
   props: [
     styleTags({
       Identifier: t.variableName,
+      'press click': t.function(t.variableName),
       Boolean: t.bool,
       String: t.string,
       LineComment: t.lineComment,
@@ -53,7 +59,11 @@ export const exampleCompletion = exampleLanguage.data.of({
   //   { label: 'car', type: 'function' },
   //   { label: 'cdr', type: 'function' },
   // ]),
-  autocomplete: myCompletions,
+  // autocomplete: myCompletions,
+  autocomplete: ifNotIn(
+    ['LineComment', 'BlockComment', 'String'],
+    completeFromList(snippets),
+  ),
 });
 
 export function example() {
